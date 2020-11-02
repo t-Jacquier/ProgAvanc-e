@@ -25,21 +25,29 @@ int main(int argc, char *argv[]){
         SDL_Renderer* ecran;
         ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
         
-        SDL_Texture* fond = charger_image("fond.bmp", ecran);
-        int pos = 0;
-        SDL_Rect position_fond;
-        position_fond.x = pos;
-        position_fond.y = 0;
-        position_fond.h = 600;
-        position_fond.w = 600;
+        SDL_Texture* f_milieu = charger_image("fond.bmp", ecran);
+        int pos_fond = 0;
+        SDL_Rect position_f_milieu;
+        position_f_milieu.x = pos_fond;
+        position_f_milieu.y = 0;
+        position_f_milieu.h = 600;
+        position_f_milieu.w = 600;
         
-        SDL_Texture* fondbis = charger_image("fond.bmp", ecran);
-        int posbis = pos + 600;
-        SDL_Rect position_fondbis;
-        position_fondbis.x = pos;
-        position_fondbis.y = 0;
-        position_fondbis.h = 600;
-        position_fondbis.w = 600;
+        SDL_Texture* f_avant = charger_image("fond.bmp", ecran);
+        int pos_fond_avant = pos_fond + 600;
+        SDL_Rect position_f_avant;
+        position_f_avant.x = pos_fond_avant;
+        position_f_avant.y = 0;
+        position_f_avant.h = 600;
+        position_f_avant.w = 600;
+        
+        SDL_Texture* f_arriere = charger_image("fond.bmp", ecran);
+        int pos_fond_arriere = pos_fond - 600;
+        SDL_Rect position_f_arriere;
+        position_f_arriere.x = pos_fond_arriere;
+        position_f_arriere.y = 0;
+        position_f_arriere.h = 600;
+        position_f_arriere.w = 600;
         
         SDL_Texture* perso = charger_image("perso.bmp", ecran);
         SDL_Rect pos_perso;
@@ -54,10 +62,12 @@ int main(int argc, char *argv[]){
         {
             
             SDL_RenderClear(ecran);
-            position_fond.x = pos;
-            position_fondbis.x = posbis;
-            SDL_RenderCopy(ecran, fond, NULL, &position_fond);
-            SDL_RenderCopy(ecran, fondbis, NULL, &position_fondbis);
+            position_f_milieu.x = pos_fond;
+            position_f_avant.x = pos_fond_avant;
+            position_f_arriere.x = pos_fond_arriere;
+            SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
+            SDL_RenderCopy(ecran, f_avant, NULL, &position_f_avant);
+            SDL_RenderCopy(ecran, f_arriere, NULL, &position_f_arriere);
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             
             while (SDL_PollEvent( &evenements ) )
@@ -69,20 +79,30 @@ int main(int argc, char *argv[]){
                     switch(evenements.key.keysym.sym)
                     {
                         case SDLK_ESCAPE:
-                        case SDLK_q:
+                        case SDLK_k:
                             terminer = true;  break;
                         case SDLK_d:
-                            pos -= 10;
-                            if (pos == -600)
-                                pos = 0;
-                            posbis = pos + 600;
+                            pos_fond -= 10;
+                            if (pos_fond == -600)
+                                pos_fond = 0;
+                            pos_fond_avant = pos_fond + 600;
+                            pos_fond_arriere = pos_fond - 600;
+                            break;
+                        case SDLK_q:
+                            pos_fond += 10; 
+                            if (pos_fond == 600)
+                                pos_fond = 0;
+                            pos_fond_avant = pos_fond + 600;
+                            pos_fond_arriere = pos_fond - 600; break;
                                 
                     }
                 }
            SDL_RenderPresent(ecran); 
         }
         
-        SDL_DestroyTexture(fond);
+        SDL_DestroyTexture(f_milieu);
+        SDL_DestroyTexture(f_avant);
+        SDL_DestroyTexture(perso);
         SDL_DestroyRenderer(ecran);
         // Quitter SDL
         SDL_DestroyWindow(fenetre);
