@@ -42,6 +42,12 @@ int main(int argc, char *argv[]){
         position_fondbis.w = 600;
         
         SDL_Texture* perso = charger_image("perso.bmp", ecran);
+        SDL_Rect pos_perso;
+        pos_perso.x = 280;
+        pos_perso.y = 400;
+        pos_perso.h = 80;
+        pos_perso.w = 40;
+        
         
         // Boucle principale
         while(!terminer)
@@ -52,6 +58,7 @@ int main(int argc, char *argv[]){
             position_fondbis.x = posbis;
             SDL_RenderCopy(ecran, fond, NULL, &position_fond);
             SDL_RenderCopy(ecran, fondbis, NULL, &position_fondbis);
+            SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             
             while (SDL_PollEvent( &evenements ) )
                 switch(evenements.type)
@@ -70,7 +77,6 @@ int main(int argc, char *argv[]){
                                 pos = 0;
                             posbis = pos + 600;
                                 
-                            printf("test");
                     }
                 }
            SDL_RenderPresent(ecran); 
