@@ -43,6 +43,8 @@ int main(int argc, char *argv[]){
         pos_perso.h = 80;
         pos_perso.w = 40;
         
+        int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
+        
         
         // Boucle principale
         while(!terminer)
@@ -70,11 +72,13 @@ int main(int argc, char *argv[]){
                             terminer = true;  break;
                         case SDLK_d:
                             pos_fond -= 10;
+                            pos_perso_absolue += 10;
                             if (pos_fond == -1200) //Si on arrive à gauche
                                 pos_fond = -600; //On replace l'image du milieu
                             break;
                         case SDLK_q:
-                            pos_fond += 10; 
+                            pos_fond += 10;
+                            pos_perso_absolue -= 10;
                             if (pos_fond == 0) //Si on arrive à droite
                                 pos_fond = -600; //On replace l'image du milieu 
                                 
@@ -82,7 +86,7 @@ int main(int argc, char *argv[]){
                 }
            SDL_RenderPresent(ecran); 
         }
-        
+        printf("%d \n",pos_perso_absolue);
         SDL_DestroyTexture(f_milieu);
         SDL_DestroyTexture(perso);
         SDL_DestroyRenderer(ecran);
