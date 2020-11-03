@@ -26,33 +26,16 @@ int main(int argc, char *argv[]){
         ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
         
         //Image centrale
-        SDL_Texture* f_milieu = charger_image("fond.bmp", ecran);
-        int pos_fond = 0;
+        SDL_Texture* f_milieu = charger_image("fondtriple.bmp", ecran);
+        int pos_fond = -600;
         SDL_Rect position_f_milieu;
         position_f_milieu.x = pos_fond;
         position_f_milieu.y = 0;
         position_f_milieu.h = 600;
-        position_f_milieu.w = 600;
-        
-        //Image qui apparait à l'avancement
-        SDL_Texture* f_avant = charger_image("fond.bmp", ecran);
-        int pos_fond_avant = pos_fond + 600;
-        SDL_Rect position_f_avant;
-        position_f_avant.x = pos_fond_avant;
-        position_f_avant.y = 0;
-        position_f_avant.h = 600;
-        position_f_avant.w = 600;
+        position_f_milieu.w = 1800;
         
         
-        //Image qui apparait au reculement
-        SDL_Texture* f_arriere = charger_image("fond.bmp", ecran);
-        int pos_fond_arriere = pos_fond - 600;
-        SDL_Rect position_f_arriere;
-        position_f_arriere.x = pos_fond_arriere;
-        position_f_arriere.y = 0;
-        position_f_arriere.h = 600;
-        position_f_arriere.w = 600;
-        
+
         SDL_Texture* perso = charger_image("perso.bmp", ecran);
         SDL_Rect pos_perso;
         pos_perso.x = 280;
@@ -69,13 +52,9 @@ int main(int argc, char *argv[]){
             
             //Actualisation des positions du fond
             position_f_milieu.x = pos_fond;
-            position_f_avant.x = pos_fond_avant;
-            position_f_arriere.x = pos_fond_arriere;
             
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
-            SDL_RenderCopy(ecran, f_avant, NULL, &position_f_avant);
-            SDL_RenderCopy(ecran, f_arriere, NULL, &position_f_arriere);
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             
             while (SDL_PollEvent( &evenements ) )
@@ -91,17 +70,13 @@ int main(int argc, char *argv[]){
                             terminer = true;  break;
                         case SDLK_d:
                             pos_fond -= 10;
-                            if (pos_fond == -600) //Si on arrive à gauche
-                                pos_fond = 0; //On replace l'image du milieu
-                            pos_fond_avant = pos_fond + 600;
-                            pos_fond_arriere = pos_fond - 600;
+                            if (pos_fond == -1200) //Si on arrive à gauche
+                                pos_fond = -600; //On replace l'image du milieu
                             break;
                         case SDLK_q:
                             pos_fond += 10; 
-                            if (pos_fond == 600) //Si on arrive à droite
-                                pos_fond = 0; //On replace l'image du milieu 
-                            pos_fond_avant = pos_fond + 600;
-                            pos_fond_arriere = pos_fond - 600; break;
+                            if (pos_fond == 0) //Si on arrive à droite
+                                pos_fond = -600; //On replace l'image du milieu 
                                 
                     }
                 }
@@ -109,8 +84,6 @@ int main(int argc, char *argv[]){
         }
         
         SDL_DestroyTexture(f_milieu);
-        SDL_DestroyTexture(f_avant);
-        SDL_DestroyTexture(f_arriere);
         SDL_DestroyTexture(perso);
         SDL_DestroyRenderer(ecran);
         // Quitter SDL
