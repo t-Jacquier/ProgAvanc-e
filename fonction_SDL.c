@@ -28,8 +28,8 @@ SDL_Texture* charger_image_transparente(const char* nomfichier, SDL_Renderer* re
     
 }
 
-SDL_Texture* charger_texte(const char* message, SDL_Renderer* renderer,TTF_Font *font, SDL_Color color){
-    SDL_Surface* txt =  TTF_RenderText_Solid(TTF_Font *font, const char *message, SDL_Color color);
-    return SDL_CreateTextureFromSurface(renderer, txt);
-    
-}
+// SDL_Texture* charger_texte(const char* message, SDL_Renderer* renderer,TTF_Font *font, SDL_Color color){
+//     SDL_Surface* txt =  TTF_RenderText_Solid(TTF_Font *font, const char *message, SDL_Color color);
+//     return SDL_CreateTextureFromSurface(renderer, txt);
+//     
+// }
