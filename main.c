@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "header.h"
 #include "fonction_SDL.h"
 #include <SDL2/SDL_ttf.h>
 
@@ -12,7 +13,7 @@ int main(int argc, char *argv[]){
     if(SDL_Init(SDL_INIT_VIDEO) < 0) // Initialisation de la SDL
     {
         printf("Erreur d’initialisation de la SDL: %s",SDL_GetError());SDL_Quit();return EXIT_FAILURE;}// Créer la fenêtre
-        fenetre = SDL_CreateWindow("Fenetre SDL", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 600, 600, SDL_WINDOW_RESIZABLE);
+        fenetre = SDL_CreateWindow("Fenetre SDL", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE);
         if(fenetre == NULL) // En cas d’erreur
         {
             printf("Erreur de la creation d’une fenetre: %s",SDL_GetError());
