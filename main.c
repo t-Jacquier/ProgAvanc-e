@@ -6,17 +6,29 @@
 #include "fonction_SDL.h"
 #include <SDL2/SDL_ttf.h>
 
-int jump(int exec, SDL_Rect* perso){
-    if (exec < 100){
-        if (exec < 50) {
-            perso->y -= 1;
+int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu){
+    if (horizontal_dep == 1){
+        pos_milieu->x -= 10;
+        if (pos_milieu->x == -1200) //Si on arrive à gauche
+            pos_milieu->x = -600; //On replace l'image du milieu
+    }
+
+    if (horizontal_dep == 2){
+        pos_milieu->x += 10;
+        if (pos_milieu->x == 0){ //Si on arrive à droite
+            pos_milieu->x = -600; //On replace l'image du milieu
+        }
+    }
+    if (exec < JUMP_TIC){
+        if (exec < JUMP_TIC / 2) {
+            perso->y -= 2;
         }
         else{
-            perso->y += 1;
+            perso->y += 2;
         }
         return exec+1;
     }
-    return 101;
+    return JUMP_TIC;
 }
 
 int main(int argc, char *argv[]){
@@ -59,22 +71,20 @@ int main(int argc, char *argv[]){
         
         int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
 
-        int saut = 100; // n'execute pas
+        int saut = JUMP_TIC; // n'execute pas de base
 
+        int dep_horizontal = 0; //1 si droite, 2 si gauche, 0 sinon
+        int time_before = 0;
+        int time_now = 0;
         
         // Boucle principale
         while(!terminer)
         {
             
             SDL_RenderClear(ecran);
+
             
-            //Actualisation des positions du fond
-            position_f_milieu.x = pos_fond;
-            
-            //Collage des textures
-            SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
-            saut = jump(saut, &pos_perso);
-            SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
+
             
             while (SDL_PollEvent( &evenements ) )
                 switch(evenements.type)
@@ -88,17 +98,12 @@ int main(int argc, char *argv[]){
                         case SDLK_k:
                             terminer = true;  break;
                         case SDLK_d:
-                            pos_fond -= 10;
+                            dep_horizontal = 1;
                             pos_perso_absolue += 10;
-                            if (pos_fond == -1200) //Si on arrive à gauche
-                                pos_fond = -600; //On replace l'image du milieu
                             break;
                         case SDLK_q:
-                            pos_fond += 10;
+                            dep_horizontal = 2;
                             pos_perso_absolue -= 10;
-                            if (pos_fond == 0){ //Si on arrive à droite
-                                pos_fond = -600; //On replace l'image du milieu
-                                }
                             break;
                         case SDLK_SPACE:
                             if (pos_perso.y == 400)
@@ -107,7 +112,14 @@ int main(int argc, char *argv[]){
                     }
 
                 }
-           SDL_RenderPresent(ecran); 
+            //Collage des textures
+            SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
+            saut = move(saut, &pos_perso, dep_horizontal, &position_f_milieu);
+            SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
+            SDL_RenderPresent(ecran);
+
+            dep_horizontal = 0; //On réinitialise le déplacement à chaque tick
+
         }
         printf("%d \n",pos_perso_absolue);
         SDL_DestroyTexture(f_milieu);

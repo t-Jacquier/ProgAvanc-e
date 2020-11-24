@@ -16,4 +16,9 @@
  */
 #define SCREEN_HEIGHT 600
 
+/**
+ * \brief Nombre de boucle pour l'animation d'un saut
+ */
+#define JUMP_TIC 50
+
 #endif //PROJET_HEADER_H
