@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "header.h"
 #include "fonction_SDL.h"
+#include "ennemy.h"
 #include <SDL2/SDL_ttf.h>
 
 int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu){
@@ -78,6 +79,12 @@ int main(int argc, char *argv[]){
         int time_before = 0;
         int time_now = 0;
         int tms = 1000 / FPS; //Temps (en ms) durant une Frame à l'écran
+
+        ennemy_t e[10];
+        e[0] = init(50, 50, 30, 30, true);
+        e[1] = init(200, 200, 30, 30, false);
+
+        SDL_Texture* enmi = charger_image("ennemies.bmp", ecran);
         
         // Boucle principale
         while(!terminer)
@@ -102,6 +109,7 @@ int main(int argc, char *argv[]){
                         case SDLK_d:
                             dep_horizontal = 1;
                             pos_perso_absolue += 10;
+                            e[0] = movePlayerRight(e[0]);
                             break;
                         case SDLK_q:
                             dep_horizontal = 2;
@@ -114,10 +122,14 @@ int main(int argc, char *argv[]){
                     }
 
                 }
+
+            // TODO: Retravailler l'affichage des ennemies
+            //  Par rapport à la position absolue
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
             saut = move(saut, &pos_perso, dep_horizontal, &position_f_milieu);
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
+            copyEnnemies(ecran, enmi, e, 2);
             SDL_RenderPresent(ecran);
 
             dep_horizontal = 0; //On réinitialise le déplacement à chaque tick
