@@ -25,9 +25,20 @@ int main(int argc, char *argv[]){
         //Contexte de rendu de l'écran
         SDL_Renderer* ecran;
         ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+        if (fenetre==NULL){ // test
+            printf("Erreur de la creation du rendu : %s" ,SDL_GetError());
+            SDL_Quit();
+            return EXIT_FAILURE;
+        }
         
         //Image centrale
         SDL_Texture* f_milieu = charger_image("fondtriple.bmp", ecran);
+        if(f_milieu==NULL){ //test
+            printf("Erreur de la creation de la texture : %s" ,SDL_GetError());
+            SDL_Quit();
+            return EXIT_FAILURE; 
+        }
+        
         int pos_fond = -600;
         SDL_Rect position_f_milieu;
         position_f_milieu.x = pos_fond;
@@ -36,8 +47,16 @@ int main(int argc, char *argv[]){
         position_f_milieu.w = 1800;
         
         
-
+        
+        
+        //Personnage
         SDL_Texture* perso = charger_image("perso.bmp", ecran);
+        if(perso==NULL){ //test
+            printf("Erreur de la creation de la texture : %s" ,SDL_GetError());
+            SDL_Quit();
+            return EXIT_FAILURE; 
+        }
+        
         SDL_Rect pos_perso;
         pos_perso.x = 280;
         pos_perso.y = 400;
@@ -45,6 +64,8 @@ int main(int argc, char *argv[]){
         pos_perso.w = 40;
         
         int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
+        
+        
         
         
         // Boucle principale
@@ -69,6 +90,7 @@ int main(int argc, char *argv[]){
                     switch(evenements.key.keysym.sym)
                     {
                         case SDLK_ESCAPE:
+                            terminer = true; break; 
                         case SDLK_k:
                             terminer = true;  break;
                         case SDLK_d:
@@ -84,7 +106,12 @@ int main(int argc, char *argv[]){
                                 pos_fond = -600; //On replace l'image du milieu 
                                 
                     }
-                }
+                }  
+                
+           
+           
+           
+        
            SDL_RenderPresent(ecran); 
         }
         printf("%d \n",pos_perso_absolue);
