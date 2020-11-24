@@ -19,6 +19,11 @@
 /**
  * \brief Nombre de boucle pour l'animation d'un saut
  */
-#define JUMP_TIC 50
+#define JUMP_TIC 10
+
+/**
+ * \brief Nombre de frame par seconde
+ */
+#define FPS 25
 
 #endif //PROJET_HEADER_H

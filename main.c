@@ -21,10 +21,10 @@ int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu){
     }
     if (exec < JUMP_TIC){
         if (exec < JUMP_TIC / 2) {
-            perso->y -= 2;
+            perso->y -= 10;
         }
         else{
-            perso->y += 2;
+            perso->y += 10;
         }
         return exec+1;
     }
@@ -74,8 +74,10 @@ int main(int argc, char *argv[]){
         int saut = JUMP_TIC; // n'execute pas de base
 
         int dep_horizontal = 0; //1 si droite, 2 si gauche, 0 sinon
+
         int time_before = 0;
         int time_now = 0;
+        int tms = 1000 / FPS; //Temps (en ms) durant une Frame à l'écran
         
         // Boucle principale
         while(!terminer)
@@ -119,6 +121,13 @@ int main(int argc, char *argv[]){
             SDL_RenderPresent(ecran);
 
             dep_horizontal = 0; //On réinitialise le déplacement à chaque tick
+            time_now = SDL_GetTicks();
+            if (time_now - time_before > tms) //Si la frame est resté suffisamment longtemps, all good
+                time_before = time_now;
+            else{
+                SDL_Delay(tms - (time_now - time_before));
+                time_before += tms;
+            }
 
         }
         printf("%d \n",pos_perso_absolue);
@@ -127,6 +136,9 @@ int main(int argc, char *argv[]){
         SDL_DestroyRenderer(ecran);
         // Quitter SDL
         SDL_DestroyWindow(fenetre);
+
+
+
         SDL_Quit();
         return 0;
 }
