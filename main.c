@@ -6,6 +6,19 @@
 #include "fonction_SDL.h"
 #include <SDL2/SDL_ttf.h>
 
+int jump(int exec, SDL_Rect* perso){
+    if (exec < 100){
+        if (exec < 50) {
+            perso->y -= 1;
+        }
+        else{
+            perso->y += 1;
+        }
+        return exec+1;
+    }
+    return 101;
+}
+
 int main(int argc, char *argv[]){
     SDL_Window* fenetre;  // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
@@ -45,7 +58,9 @@ int main(int argc, char *argv[]){
         pos_perso.w = 40;
         
         int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
-        
+
+        int saut = 100; // n'execute pas
+
         
         // Boucle principale
         while(!terminer)
@@ -58,6 +73,7 @@ int main(int argc, char *argv[]){
             
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
+            saut = jump(saut, &pos_perso);
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             
             while (SDL_PollEvent( &evenements ) )
@@ -80,10 +96,16 @@ int main(int argc, char *argv[]){
                         case SDLK_q:
                             pos_fond += 10;
                             pos_perso_absolue -= 10;
-                            if (pos_fond == 0) //Si on arrive à droite
-                                pos_fond = -600; //On replace l'image du milieu 
-                                
+                            if (pos_fond == 0){ //Si on arrive à droite
+                                pos_fond = -600; //On replace l'image du milieu
+                                }
+                            break;
+                        case SDLK_SPACE:
+                            if (pos_perso.y == 400)
+                                saut = 0;
+                            break;
                     }
+
                 }
            SDL_RenderPresent(ecran); 
         }
