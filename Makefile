@@ -4,7 +4,7 @@ LIBS = -L./SDL2_ttf/.libs
 LDFLAGS = `sdl2-config --cflags --libs` -lSDL2_ttf
 INCLUDES = -I./SDL2_ttf
 EXEC =main
-SRC =main.c fonction_SDL.c ennemy.c
+SRC =main.c fonction_SDL.c ennemy.c platform.c
 OBJ = $(SRC:.c=.o)
 
 

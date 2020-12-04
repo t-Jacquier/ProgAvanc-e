@@ -6,6 +6,7 @@
 #include "fonction_SDL.h"
 #include "ennemy.h"
 #include <SDL2/SDL_ttf.h>
+#include "platform.h"
 
 int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu){
     if (horizontal_dep == 1){
@@ -81,8 +82,8 @@ int main(int argc, char *argv[]){
         int tms = 1000 / FPS; //Temps (en ms) durant une Frame à l'écran
 
         ennemy_t e[10];
-        e[0] = init(50, 50, 30, 30, true);
-        e[1] = init(200, 200, 30, 30, false);
+        e[0] = initE(50, 50, 30, 30, true);
+        e[1] = initE(200, 200, 30, 30, false);
 
         SDL_Texture* enmi = charger_image("ennemies.bmp", ecran);
         
