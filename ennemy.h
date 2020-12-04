@@ -14,13 +14,13 @@
 #ifndef PROJET_ENNEMY_H
 #define PROJET_ENNEMY_H
 
-struct ennemy_s{
+struct s_ennemy{
     SDL_Rect coo;
     int life;
     int in_life;
 };
 
-typedef struct ennemy_s ennemy_t;
+typedef struct s_ennemy ennemy_t;
 
 ennemy_t init(int x_set, int y_set, int w_set, int h_set, bool inLife);
 
