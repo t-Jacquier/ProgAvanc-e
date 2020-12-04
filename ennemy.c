@@ -10,7 +10,7 @@
 #include "header.h"
 #include "fonction_SDL.h"
 
-ennemy_t init(int x_set, int y_set, int w_set, int h_set, bool inLife){
+ennemy_t initE(int x_set, int y_set, int w_set, int h_set, bool inLife){
     ennemy_t ennemy;
     ennemy.coo.x= x_set;
     ennemy.coo.y = y_set;

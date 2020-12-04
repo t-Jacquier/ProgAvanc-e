@@ -22,7 +22,7 @@ struct s_ennemy{
 
 typedef struct s_ennemy ennemy_t;
 
-ennemy_t init(int x_set, int y_set, int w_set, int h_set, bool inLife);
+ennemy_t initE(int x_set, int y_set, int w_set, int h_set, bool inLife);
 
 void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, ennemy_t tab[10], int nb_ennemies);
 
