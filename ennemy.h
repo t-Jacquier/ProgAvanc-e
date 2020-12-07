@@ -28,4 +28,7 @@ void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, ennemy_t tab[10], int
 
 ennemy_t movePlayerRight(ennemy_t en);
 
+ennemy_t movePlayerLeft(ennemy_t en);
+
+
 #endif //PROJET_ENNEMY_H

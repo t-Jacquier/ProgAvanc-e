@@ -5,7 +5,6 @@
 #include "header.h"
 #include "fonction_SDL.h"
 #include "ennemy.h"
-#include <SDL2/SDL_ttf.h>
 #include "platform.h"
 
 int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu){
@@ -155,4 +154,3 @@ int main(int argc, char *argv[]){
         SDL_Quit();
         return 0;
 }
-#test

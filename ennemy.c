@@ -34,3 +34,7 @@ ennemy_t movePlayerRight(ennemy_t en){
     return en;
 }
 
+ennemy_t movePlayerLeft(ennemy_t en){
+    en.coo.x += 10;
+    return en;
+}
