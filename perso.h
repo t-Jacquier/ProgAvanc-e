@@ -1,0 +1,16 @@
+//
+// Created by timeojacquier on 08/12/2020.
+//
+#include "fonction_SDL.h"
+#include <SDL2/SDL.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "header.h"
+
+#ifndef PROJET_PERSO_H
+#define PROJET_PERSO_H
+
+int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu);
+
+#endif //PROJET_PERSO_H
