@@ -7,6 +7,7 @@
 #include "ennemy.h"
 #include "platform.h"
 #include "perso.h"
+#include "graphic.h"
 
 
 int main(int argc, char *argv[]){
@@ -31,21 +32,12 @@ int main(int argc, char *argv[]){
         
         //Image centrale
         SDL_Texture* f_milieu = charger_image("fondtriple.bmp", ecran);
-        int pos_fond = -600;
-        SDL_Rect position_f_milieu;
-        position_f_milieu.x = pos_fond;
-        position_f_milieu.y = 0;
-        position_f_milieu.h = 600;
-        position_f_milieu.w = 1800;
+        SDL_Rect position_f_milieu = init_fond();
         
         
 
         SDL_Texture* perso = charger_image("perso.bmp", ecran);
-        SDL_Rect pos_perso;
-        pos_perso.x = 280;
-        pos_perso.y = 400;
-        pos_perso.h = 80;
-        pos_perso.w = 40;
+        SDL_Rect pos_perso = init_perso();
         
         int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
 
@@ -58,8 +50,8 @@ int main(int argc, char *argv[]){
         int tms = 1000 / FPS; //Temps (en ms) durant une Frame à l'écran
 
         ennemy_t e[10];
-        e[0] = initE(50, 50, 30, 30, true);
-        e[1] = initE(200, 200, 30, 30, false);
+        e[0] = initE(50, 50, 30, 30, true, pos_perso_absolue);
+        e[1] = initE(200, 200, 30, 30, true, pos_perso_absolue);
 
         SDL_Texture* enmi = charger_image("ennemies.bmp", ecran);
         

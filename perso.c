@@ -10,6 +10,16 @@
 #include "header.h"
 #include "perso.h"
 
+SDL_Rect init_perso(){
+    SDL_Rect pos_perso;
+    pos_perso.x = 280;
+    pos_perso.y = 400;
+    pos_perso.h = 80;
+    pos_perso.w = 40;
+
+    return pos_perso;
+}
+
 int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu){
     if (horizontal_dep == 1){
         pos_milieu->x -= 10;

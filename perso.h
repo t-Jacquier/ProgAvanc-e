@@ -11,6 +11,8 @@
 #ifndef PROJET_PERSO_H
 #define PROJET_PERSO_H
 
+SDL_Rect init_perso();
+
 int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu);
 
 #endif //PROJET_PERSO_H
