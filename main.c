@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
         int tms = 1000 / FPS; //Temps (en ms) durant une Frame à l'écran
 
         ennemy_t e[10];
-        e[0] = initE(800, 50, 30, 30, true, pos_perso_absolue);
+        e[0] = initE(600, 50, 30, 30, true, pos_perso_absolue);
         e[1] = initE(80, 50, 30, 30, true, pos_perso_absolue);
 
         SDL_Texture* enmi = charger_image("ennemies.bmp", ecran);
@@ -79,11 +79,13 @@ int main(int argc, char *argv[]){
                             dep_horizontal = 1;
                             pos_perso_absolue += 10;
                             e[0] = movePlayerRight(e[0]);
+                            e[1] = movePlayerRight(e[1]);
                             break;
                         case SDLK_q:
                             dep_horizontal = 2;
                             pos_perso_absolue -= 10;
                             e[0] = movePlayerLeft(e[0]);
+                            e[1] = movePlayerLeft(e[1]);
                             break;
                         case SDLK_SPACE:
                             if (pos_perso.y == 400)
