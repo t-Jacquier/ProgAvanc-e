@@ -8,6 +8,7 @@
 #include "platform.h"
 #include "perso.h"
 #include "graphic.h"
+#include "param.h"
 
 
 int main(int argc, char *argv[]){
@@ -78,14 +79,11 @@ int main(int argc, char *argv[]){
                         case SDLK_d:
                             dep_horizontal = 1;
                             pos_perso_absolue += 10;
-                            e[0] = movePlayerRight(e[0]);
-                            e[1] = movePlayerRight(e[1]);
+
                             break;
                         case SDLK_q:
                             dep_horizontal = 2;
                             pos_perso_absolue -= 10;
-                            e[0] = movePlayerLeft(e[0]);
-                            e[1] = movePlayerLeft(e[1]);
                             break;
                         case SDLK_SPACE:
                             if (pos_perso.y == 400)
@@ -99,7 +97,7 @@ int main(int argc, char *argv[]){
             //  Par rapport à la position absolue
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
-            saut = move(saut, &pos_perso, dep_horizontal, &position_f_milieu);
+            saut = move(saut, &pos_perso, dep_horizontal, &position_f_milieu, e);
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             copyEnnemies(ecran, enmi, e, 2);
             SDL_RenderPresent(ecran);
@@ -118,6 +116,7 @@ int main(int argc, char *argv[]){
         SDL_DestroyTexture(f_milieu);
         SDL_DestroyTexture(perso);
         SDL_DestroyRenderer(ecran);
+        highScore("score.txt", pos_perso_absolue);
         // Quitter SDL
         SDL_DestroyWindow(fenetre);
 
