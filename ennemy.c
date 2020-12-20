@@ -30,6 +30,14 @@ void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, ennemy_t tab[10], int
     }
 }
 
+void detectCollid(int pos_perso, ennemy_t* en, SDL_Rect struct_perso){
+  if (pos_perso < en->coo.x + en->coo.w && pos_perso + struct_perso.w > en->coo.x){
+    en->in_life = 0;
+  } else{
+    en->in_life = 1;
+  }
+}
+
 
 ennemy_t movePlayerRight(ennemy_t en){
     en.coo.x -= 10;

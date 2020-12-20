@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
         int time_now = 0;
         int tms = 1000 / FPS; //Temps (en ms) durant une Frame à l'écran
 
-        ennemy_t e[10];
+        ennemy_t *e = malloc(10*sizeof(ennemy_t));
         e[0] = initE(600, 50, 30, 30, true, pos_perso_absolue);
         e[1] = initE(80, 50, 30, 30, true, pos_perso_absolue);
 
@@ -101,6 +101,7 @@ int main(int argc, char *argv[]){
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             copyEnnemies(ecran, enmi, e, 2);
             SDL_RenderPresent(ecran);
+            detectCollid(pos_perso_absolue, &e[0], pos_perso);
 
             dep_horizontal = 0; //On réinitialise le déplacement à chaque tick
             time_now = SDL_GetTicks();

@@ -31,5 +31,7 @@ ennemy_t movePlayerRight(ennemy_t en);
 
 ennemy_t movePlayerLeft(ennemy_t en);
 
+void detectCollid(int pos_perso, ennemy_t* en, SDL_Rect struct_perso);
+
 
 #endif //PROJET_ENNEMY_H
