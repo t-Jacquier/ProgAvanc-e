@@ -50,9 +50,7 @@ int main(int argc, char *argv[]){
         int time_now = 0;
         int tms = 1000 / FPS; //Temps (en ms) durant une Frame à l'écran
 
-        ennemy_t *e = malloc(10*sizeof(ennemy_t));
-        e[0] = initE(600, 50, 30, 30, true, pos_perso_absolue);
-        e[1] = initE(80, 50, 30, 30, true, pos_perso_absolue);
+        ennemy_t *e = tabE();
 
         SDL_Texture* enmi = charger_image("ennemies.bmp", ecran);
         
@@ -82,8 +80,10 @@ int main(int argc, char *argv[]){
 
                             break;
                         case SDLK_q:
-                            dep_horizontal = 2;
-                            pos_perso_absolue -= 10;
+                            if (pos_perso_absolue > 0) {
+                              dep_horizontal = 2;
+                              pos_perso_absolue -= 10;
+                            }
                             break;
                         case SDLK_SPACE:
                             if (pos_perso.y == 400)
@@ -91,17 +91,17 @@ int main(int argc, char *argv[]){
                             break;
                     }
 
+
                 }
 
-            // TODO: Retravailler l'affichage des ennemies
-            //  Par rapport à la position absolue
+
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
             saut = move(saut, &pos_perso, dep_horizontal, &position_f_milieu, e);
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             copyEnnemies(ecran, enmi, e, 2);
             SDL_RenderPresent(ecran);
-            detectCollid(pos_perso_absolue, &e[0], pos_perso);
+            collid(pos_perso_absolue, e, pos_perso);
 
             dep_horizontal = 0; //On réinitialise le déplacement à chaque tick
             time_now = SDL_GetTicks();

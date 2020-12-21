@@ -17,9 +17,17 @@ ennemy_t initE(int x_set, int y_set, int w_set, int h_set, bool inLife, int pos_
     ennemy.coo.w = w_set;
     ennemy.coo.h = h_set;
     ennemy.in_life = inLife;
-    ennemy.pos_absolue = pos_absolue_joueur + x_set - 600; //L'origine du repère jeu est à 0 pour les coo du personnéages
+    ennemy.pos_absolue = pos_absolue_joueur + x_set - 280; //L'origine du repère jeu est à 0 pour les coo du personnéages
+
 
     return ennemy;
+}
+
+ennemy_t* tabE(){
+  ennemy_t *e = malloc(10*sizeof(ennemy_t));
+  e[0] = initE(450, 450, 30, 30, true, 0);
+  e[1] = initE(380, 450, 30, 30, true, 0);
+  return e;
 }
 
 void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, ennemy_t tab[10], int nb_ennemies){
@@ -31,13 +39,18 @@ void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, ennemy_t tab[10], int
 }
 
 void detectCollid(int pos_perso, ennemy_t* en, SDL_Rect struct_perso){
-  if (pos_perso < en->coo.x + en->coo.w && pos_perso + struct_perso.w > en->coo.x){
+  if (pos_perso < en->pos_absolue + en->coo.w && pos_perso + struct_perso.w > en->pos_absolue){
     en->in_life = 0;
   } else{
     en->in_life = 1;
   }
 }
 
+void collid(int pos_perso, ennemy_t en[], SDL_Rect struct_perso){
+  for (int i = 0; i<10;i++){
+    detectCollid(pos_perso, &en[i], struct_perso);
+  }
+}
 
 ennemy_t movePlayerRight(ennemy_t en){
     en.coo.x -= 10;

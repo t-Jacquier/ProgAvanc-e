@@ -14,7 +14,7 @@
 SDL_Rect init_perso(){
     SDL_Rect pos_perso;
     pos_perso.x = 280;
-    pos_perso.y = 400;
+    pos_perso.y = 385;
     pos_perso.h = 80;
     pos_perso.w = 40;
 
