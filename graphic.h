@@ -11,6 +11,10 @@
 #ifndef PROJET_GRAPHIC_H
 #define PROJET_GRAPHIC_H
 
+
+
+typedef struct s_ennemy ennemy_t;
+
 SDL_Rect init_fond();
 
 #endif //PROJET_GRAPHIC_H

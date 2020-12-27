@@ -35,9 +35,9 @@ void moveEnnemyRight(ennemy_t* en, int nbEnnemies);
 
 void moveEnnemyLeft(ennemy_t* en, int nbEnnemies);
 
-void detectCollid(int pos_perso, ennemy_t* en, SDL_Rect struct_perso);
+void detectCollid(int pos_perso, ennemy_t* en, SDL_Rect* struct_perso);
 
-void collid(int pos_perso, ennemy_t en[], SDL_Rect struct_perso, int nbEnnemies);
+void collid(int pos_perso, ennemy_t en[], SDL_Rect* struct_perso, int nbEnnemies);
 
 
 #endif //PROJET_ENNEMY_H
