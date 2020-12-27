@@ -33,7 +33,7 @@ int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu, en
 
     if (horizontal_dep == 2){
         pos_milieu->x += 10;
-        moveEnnemyRight(en, 4);
+        moveEnnemyLeft(en, 4);
         if (pos_milieu->x == 0){ //Si on arrive à droite
             pos_milieu->x = -600; //On replace l'image du milieu
         }

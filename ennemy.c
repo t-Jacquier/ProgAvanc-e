@@ -57,21 +57,13 @@ void detectCollid(int pos_perso, ennemy_t* en, SDL_Rect struct_perso){
   }
 }
 
-void collid(int pos_perso, ennemy_t en[], SDL_Rect struct_perso){
-  for (int i = 0; i<10;i++){
+void collid(int pos_perso, ennemy_t en[], SDL_Rect struct_perso, int nbEnnemies){
+  for (int i = 0; i<nbEnnemies;i++){
     detectCollid(pos_perso, &en[i], struct_perso);
   }
 }
 
-ennemy_t movePlayerRight(ennemy_t en){
-  en.coo.x -= 10;
-  return en;
-}
 
-ennemy_t movePlayerLeft(ennemy_t en){
-    en.coo.x += 10;
-    return en;
-}
 
 void moveEnnemyRight(ennemy_t* en, int nbEnnemies){
   for (int i = 0; i < nbEnnemies; i++)

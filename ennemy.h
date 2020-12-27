@@ -31,17 +31,13 @@ void freeEnnemy(ennemy_t* en[]);
 
 void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, ennemy_t tab[10], int nb_ennemies);
 
-ennemy_t movePlayerRight(ennemy_t en);
-
 void moveEnnemyRight(ennemy_t* en, int nbEnnemies);
-
-ennemy_t movePlayerLeft(ennemy_t en);
 
 void moveEnnemyLeft(ennemy_t* en, int nbEnnemies);
 
 void detectCollid(int pos_perso, ennemy_t* en, SDL_Rect struct_perso);
 
-void collid(int pos_perso, ennemy_t en[], SDL_Rect struct_perso);
+void collid(int pos_perso, ennemy_t en[], SDL_Rect struct_perso, int nbEnnemies);
 
 
 #endif //PROJET_ENNEMY_H
