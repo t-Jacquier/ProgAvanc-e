@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "header.h"
+#include <time.h>
 #include "fonction_SDL.h"
 
 ennemy_t initE(int x_set, int y_set, int w_set, int h_set, bool inLife, int pos_absolue_joueur){
@@ -23,11 +24,21 @@ ennemy_t initE(int x_set, int y_set, int w_set, int h_set, bool inLife, int pos_
     return ennemy;
 }
 
-ennemy_t* tabE(){
+ennemy_t* tabE(int pos_absolue_joueur){
   ennemy_t *e = malloc(10*sizeof(ennemy_t));
-  e[0] = initE(450, 450, 30, 30, true, 0);
-  e[1] = initE(380, 450, 30, 30, true, 0);
+  int x = 0;
+  srand(time(NULL));
+  for (int i = 0; i < 3; i++){
+    x = (rand() % 600) + 280;
+    e[i] = initE(x, 450, 30, 30, true, pos_absolue_joueur);
+  }
+  /*e[0] = initE(450, 450, 30, 30, true, 0);
+  e[1] = initE(380, 450, 30, 30, true, 0);*/
   return e;
+}
+
+void freeEnnemy(ennemy_t* en[]){
+    free(en[0]);
 }
 
 void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, ennemy_t tab[10], int nb_ennemies){
@@ -53,12 +64,22 @@ void collid(int pos_perso, ennemy_t en[], SDL_Rect struct_perso){
 }
 
 ennemy_t movePlayerRight(ennemy_t en){
-    en.coo.x -= 10;
-    return en;
+  en.coo.x -= 10;
+  return en;
 }
 
 ennemy_t movePlayerLeft(ennemy_t en){
     en.coo.x += 10;
     return en;
+}
+
+void moveEnnemyRight(ennemy_t* en, int nbEnnemies){
+  for (int i = 0; i < nbEnnemies; i++)
+    en[i].coo.x -= 10;
+}
+
+void moveEnnemyLeft(ennemy_t* en, int nbEnnemies){
+  for (int i = 0; i < nbEnnemies; i++)
+    en[i].coo.x += 10;
 }
 

@@ -24,16 +24,16 @@ SDL_Rect init_perso(){
 int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu, ennemy_t en[10]){
     if (horizontal_dep == 1){
         pos_milieu->x -= 10;
-        en[0] = movePlayerRight(en[0]);
-        en[1] = movePlayerRight(en[1]);
+        moveEnnemyRight(en, 4);
+        //en[1] = movePlayerRight(en[1]);
+        //en[2] = movePlayerRight(en[2]);
         if (pos_milieu->x == -1200) //Si on arrive à gauche
             pos_milieu->x = -600; //On replace l'image du milieu
     }
 
     if (horizontal_dep == 2){
         pos_milieu->x += 10;
-        en[0] = movePlayerLeft(en[0]);
-        en[1] = movePlayerLeft(en[1]);
+        moveEnnemyRight(en, 4);
         if (pos_milieu->x == 0){ //Si on arrive à droite
             pos_milieu->x = -600; //On replace l'image du milieu
         }
