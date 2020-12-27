@@ -15,4 +15,5 @@ void highScore(const char* nomFichier, int score);
 
 void resethighScore(const char* nomFichier);
 
+
 #endif //PROJET_PARAM_H

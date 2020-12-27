@@ -44,3 +44,4 @@ void resethighScore(const char* nomFichier) {
         fclose(file);
     }
 }
+
