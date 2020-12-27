@@ -26,4 +26,8 @@
  */
 #define FPS 25
 
+#define TRUE 1
+
+#define FALSE 0
+
 #endif //PROJET_HEADER_H

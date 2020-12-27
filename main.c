@@ -10,7 +10,7 @@
 #include "graphic.h"
 #include "param.h"
 
-
+int pause = 0;
 
 int main(int argc, char *argv[]){
     SDL_Window* fenetre;  // Déclaration de la fenêtre
@@ -36,7 +36,9 @@ int main(int argc, char *argv[]){
         SDL_Texture* f_milieu = charger_image("fondtriple.bmp", ecran);
         SDL_Rect position_f_milieu = init_fond();
         
-        
+        SDL_Texture* menu_back = charger_image("menu.bmp", ecran);
+        SDL_Rect pos_menu;
+        pos_menu = init_menu(ecran, menu_back);
 
         SDL_Texture* perso = charger_image("perso.bmp", ecran);
         SDL_Rect pos_perso = init_perso();
@@ -65,19 +67,27 @@ int main(int argc, char *argv[]){
                     case SDL_QUIT:
                         terminer = true; break;
                     case SDL_KEYDOWN:
-                      if (evenements.key.keysym.sym==SDLK_ESCAPE){
+                      if (evenements.key.keysym.sym==SDLK_ESCAPE){ //quitter le jeu
                         terminer = true;
                       }
-                      if (evenements.key.keysym.sym==SDLK_d){
+
+                      if (evenements.key.keysym.sym==SDLK_d && !pause){ //mouvement à droite
                         dep_horizontal = 1;
                         pos_perso_absolue += 10;
                       }
-                      if (evenements.key.keysym.sym== SDLK_q){
+
+                      if (evenements.key.keysym.sym== SDLK_q && !pause){ //mouvement à gauche
                         if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
                           dep_horizontal = 2;
                           pos_perso_absolue -= 10;
                         }
                       }
+
+                      if (evenements.key.keysym.sym == SDLK_p){
+                        if (pause) pause = FALSE;
+                        else pause = TRUE;
+                      }
+                      break;
                    /*
                       case SDLK_SPACE:
                         if (pos_perso.y == 400)
@@ -93,6 +103,7 @@ int main(int argc, char *argv[]){
 
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
+            menu(ecran, evenements, pause, menu_back, pos_menu);
             saut = move(saut, &pos_perso, dep_horizontal, &position_f_milieu, e);
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             copyEnnemies(ecran, enmi, e, 3);

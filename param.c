@@ -45,3 +45,19 @@ void resethighScore(const char* nomFichier) {
     }
 }
 
+SDL_Rect init_menu(SDL_Renderer* ecran, SDL_Texture* menu_back){
+  //menu_back = charger_image("menu.bmp", ecran);
+  SDL_Rect pos;
+  pos.x = 320;
+  pos.y = 150;
+  pos.w = 275;
+  pos.h = 123;
+  return pos;
+}
+
+void menu(SDL_Renderer* ecran, SDL_Event event, int pause, SDL_Texture* menu_back, SDL_Rect pos_menu){
+  if (pause){
+    SDL_RenderCopy(ecran, menu_back, NULL, &pos_menu);
+  }
+}
+
