@@ -41,6 +41,8 @@ int main(int argc, char *argv[]){
         pos_menu = init_menu(ecran, menu_back);
 
         SDL_Texture* perso = charger_image_transparente("perso2.bmp", ecran, 0, 255, 0);
+        SDL_Texture* perso_reverse = charger_image_transparente("perso_reverse.bmp", ecran, 0, 255, 0);
+        SDL_Texture* displayed_perso = perso_reverse;
         SDL_Rect pos_perso = init_perso();
         
         int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
@@ -54,7 +56,7 @@ int main(int argc, char *argv[]){
 
         ennemy_t *e = tabE(pos_perso_absolue);
 
-        SDL_Texture* enmi = charger_image("ennemies.bmp", ecran);
+        SDL_Texture* enmi = charger_image_transparente("pasteque.bmp", ecran, 255, 0, 0);
         
         // Boucle principale
         while(!terminer)
@@ -76,6 +78,7 @@ int main(int argc, char *argv[]){
                         pos_perso_absolue +=10;
                         if (position_f_milieu.x == -1800)
                           position_f_milieu.x = 0;
+                        displayed_perso = perso; // Sens du sprite
                       }
 
                       if (evenements.key.keysym.sym== SDLK_q && !pause){ //mouvement à gauche
@@ -87,6 +90,7 @@ int main(int argc, char *argv[]){
                           }
                             pos_perso_absolue -= 10;
                         }
+                        displayed_perso = perso_reverse;
                       }
 
                       //gestion du saut
@@ -107,7 +111,7 @@ int main(int argc, char *argv[]){
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
             menu(ecran, evenements, pause, menu_back, pos_menu);
-            SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
+            SDL_RenderCopy(ecran, displayed_perso, NULL, &pos_perso);
             copyEnnemies(ecran, enmi, e, 3);
             SDL_RenderPresent(ecran);
             collid(pos_perso_absolue, e, &pos_perso, 3);
