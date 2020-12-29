@@ -9,6 +9,9 @@
 #include <stdbool.h>
 #include "header.h"
 #include "fonction_SDL.h"
+#include "ennemy.h"
+#include "graphic.h"
+#include "perso.h"
 
 void highScore(const char* nomFichier, int score){
     FILE* file = fopen(nomFichier, "r+");
@@ -59,5 +62,13 @@ void menu(SDL_Renderer* ecran, SDL_Event event, int pause, SDL_Texture* menu_bac
   if (pause){
     SDL_RenderCopy(ecran, menu_back, NULL, &pos_menu);
   }
+}
+
+void reset(SDL_Rect* fond, SDL_Rect* perso, ennemy_t* ennemy, int* pos_perso){
+  highScore("score.txt", *pos_perso);
+  *pos_perso = 0;
+  *fond = init_fond();
+  *perso = init_perso();
+  *ennemy = *(tabE(*pos_perso));
 }
 

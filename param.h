@@ -7,6 +7,9 @@
 #include <stdbool.h>
 #include "header.h"
 #include "fonction_SDL.h"
+#include "ennemy.h"
+#include "graphic.h"
+#include "perso.h"
 
 #ifndef PROJET_PARAM_H
 #define PROJET_PARAM_H
@@ -18,5 +21,7 @@ void resethighScore(const char* nomFichier);
 void menu(SDL_Renderer* ecran, SDL_Event event, int pause, SDL_Texture* menu_back, SDL_Rect pos_menu);
 
 SDL_Rect init_menu(SDL_Renderer* ecran, SDL_Texture* menu_back);
+
+void reset(SDL_Rect* fond, SDL_Rect* perso, ennemy_t *ennemy, int *pos_perso);
 
 #endif //PROJET_PARAM_H

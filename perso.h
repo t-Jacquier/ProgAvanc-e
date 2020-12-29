@@ -21,7 +21,7 @@ struct s_projectile{
 
 typedef struct s_projectile projectile_t;
 
-void move_projectile(SDL_Rect* perso, s_projectile* tab); //Gere le mouvement des projectiles, qui reste collé au perso si pas tiré et qui avance sinon
+void move_projectile(SDL_Rect* perso, projectile_t* tab); //Gere le mouvement des projectiles, qui reste collé au perso si pas tiré et qui avance sinon
 
 SDL_Rect init_perso();
 
