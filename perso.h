@@ -12,6 +12,17 @@
 #ifndef PROJET_PERSO_H
 #define PROJET_PERSO_H
 
+
+struct s_projectile{
+    SDL_Rect coo;
+    int shot;
+    int sens;
+};
+
+typedef struct s_projectile projectile_t;
+
+void move_projectile(SDL_Rect* perso, s_projectile* tab); //Gere le mouvement des projectiles, qui reste collé au perso si pas tiré et qui avance sinon
+
 SDL_Rect init_perso();
 
 int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu, ennemy_t en[10]);

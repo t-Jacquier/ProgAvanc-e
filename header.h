@@ -30,4 +30,6 @@
 
 #define FALSE 0
 
+#define NB_PROJECTILE 10
+
 #endif //PROJET_HEADER_H
