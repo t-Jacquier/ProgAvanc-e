@@ -22,3 +22,4 @@ SDL_Rect init_perso(){
 }
 
 
+

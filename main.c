@@ -12,6 +12,8 @@
 
 int pause = 0;
 
+int timer = 0;
+
 int main(int argc, char *argv[]){
     SDL_Window* fenetre;  // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
@@ -31,18 +33,24 @@ int main(int argc, char *argv[]){
         //Contexte de rendu de l'écran
         SDL_Renderer* ecran;
         ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
-        
+
         //Image centrale
         SDL_Texture* f_milieu = charger_image("fond6.bmp", ecran);
         SDL_Rect position_f_milieu = init_fond();
-        
+
         SDL_Texture* menu_back = charger_image("menu.bmp", ecran);
         SDL_Rect pos_menu;
         pos_menu = init_menu(ecran, menu_back);
 
         SDL_Texture* perso = charger_image_transparente("perso2.bmp", ecran, 0, 255, 0);
+        SDL_Texture* open_mouth = charger_image_transparente("open_mouth.bmp", ecran, 0, 255, 0);
+
         SDL_Texture* perso_reverse = charger_image_transparente("perso_reverse.bmp", ecran, 0, 255, 0);
-        SDL_Texture* displayed_perso = perso_reverse;
+        SDL_Texture* open_mouth_reverse = charger_image_transparente("open_mouth_reverse.bmp", ecran, 0, 255, 0);
+
+        SDL_Texture* displayed_perso = perso;
+        int sens; // Mémoire pour le tir
+
         SDL_Rect pos_perso = init_perso();
         
         int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
@@ -98,6 +106,19 @@ int main(int argc, char *argv[]){
 
                       }
 
+                      if (evenements.key.keysym.sym == SDLK_s && !pause){
+                        //test du sens du sprite originel
+                        if (displayed_perso == perso) {
+                          sens = 1;
+                          displayed_perso = open_mouth;
+                        }
+                        if (displayed_perso == perso_reverse) {
+                          sens = 2;
+                          displayed_perso = open_mouth_reverse;
+                        }
+                        timer = 0;
+                      }
+
                       if (evenements.key.keysym.sym == SDLK_p){
                         if (pause) pause = FALSE;
                         else pause = TRUE;
@@ -107,7 +128,19 @@ int main(int argc, char *argv[]){
 
                 }
 
+            //Gestion de la texture du perso
+            if (timer >= 0 && timer < 40){
+              if (sens == 1)
+              displayed_perso = open_mouth;
+              else
+                displayed_perso = open_mouth_reverse;
+              timer++;
+            }
 
+            if (timer == 40){
+              timer = -1;
+              sens = 0;
+            }
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
             menu(ecran, evenements, pause, menu_back, pos_menu);
