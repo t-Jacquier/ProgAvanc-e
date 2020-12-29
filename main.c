@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
         SDL_Rect pos_menu;
         pos_menu = init_menu(ecran, menu_back);
 
-        SDL_Texture* perso = charger_image("perso.bmp", ecran);
+        SDL_Texture* perso = charger_image_transparente("perso2.bmp", ecran, 0, 255, 0);
         SDL_Rect pos_perso = init_perso();
         
         int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
@@ -112,11 +112,10 @@ int main(int argc, char *argv[]){
             SDL_RenderPresent(ecran);
             collid(pos_perso_absolue, e, &pos_perso, 3);
 
-            dep_horizontal = 0; //On réinitialise le déplacement à chaque tick
             time_now = SDL_GetTicks();
             if (time_now - time_before > tms) //Si la frame est resté suffisamment longtemps, all good
                 time_before = time_now;
-            else{
+            else{ // Sinon on temporise avant de passer
                 SDL_Delay(tms - (time_now - time_before));
                 time_before += tms;
             }
