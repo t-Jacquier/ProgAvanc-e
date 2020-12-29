@@ -30,7 +30,7 @@ ennemy_t* tabE(int pos_absolue_joueur){
   srand(time(NULL));
   for (int i = 0; i < 3; i++){
     x = (rand() % 600) + 280;
-    e[i] = initE(x, 450, 30, 30, true, pos_absolue_joueur);
+    e[i] = initE(x, 435, 48, 31, true, pos_absolue_joueur);
   }
   /*e[0] = initE(450, 450, 30, 30, true, 0);
   e[1] = initE(380, 450, 30, 30, true, 0);*/
