@@ -45,9 +45,7 @@ int main(int argc, char *argv[]){
         
         int pos_perso_absolue = 0; //avancement du personnage sur la map, indépendant des coordonnées du fond
 
-        int saut = JUMP_TIC; // n'execute pas de base
 
-        int dep_horizontal = 0; //1 si droite, 2 si gauche, 0 sinon
 
         int time_before = 0;
         int time_now = 0;
@@ -73,15 +71,22 @@ int main(int argc, char *argv[]){
                       }
 
                       if (evenements.key.keysym.sym==SDLK_d && !pause){ //mouvement à droite
-                        dep_horizontal = 1;
-                        pos_perso_absolue += 10;
+                        position_f_milieu.x -= 10;
+                        moveEnnemyRight(e, 4);
+                        pos_perso_absolue +=10;
+                        if (position_f_milieu.x == -1800)
+                          position_f_milieu.x = 0;
                       }
 
                       if (evenements.key.keysym.sym== SDLK_q && !pause){ //mouvement à gauche
-                        //if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
-                          dep_horizontal = 2;
-                          pos_perso_absolue -= 10;
-                        //}
+                        if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
+                          position_f_milieu.x += 10;
+                          moveEnnemyLeft(e, 4);
+                          if (position_f_milieu.x == -480){ //Si on arrive à droite
+                            position_f_milieu.x = -2280; //On replace l'image du milieu
+                          }
+                            pos_perso_absolue -= 10;
+                        }
                       }
 
                       //gestion du saut
@@ -94,14 +99,6 @@ int main(int argc, char *argv[]){
                         else pause = TRUE;
                       }
                       break;
-                   /*
-                      case SDLK_SPACE:
-                        if (pos_perso.y == 400)
-                          saut = 0;
-                        break;
-
-
-                    }*/
 
 
                 }
@@ -110,7 +107,6 @@ int main(int argc, char *argv[]){
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
             menu(ecran, evenements, pause, menu_back, pos_menu);
-            saut = move(saut, &pos_perso, dep_horizontal, &position_f_milieu, e);
             SDL_RenderCopy(ecran, perso, NULL, &pos_perso);
             copyEnnemies(ecran, enmi, e, 3);
             SDL_RenderPresent(ecran);
