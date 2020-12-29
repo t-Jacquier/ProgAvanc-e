@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
         ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
         
         //Image centrale
-        SDL_Texture* f_milieu = charger_image("fondtriple.bmp", ecran);
+        SDL_Texture* f_milieu = charger_image("fond6.bmp", ecran);
         SDL_Rect position_f_milieu = init_fond();
         
         SDL_Texture* menu_back = charger_image("menu.bmp", ecran);
@@ -78,10 +78,15 @@ int main(int argc, char *argv[]){
                       }
 
                       if (evenements.key.keysym.sym== SDLK_q && !pause){ //mouvement à gauche
-                        if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
+                        //if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
                           dep_horizontal = 2;
                           pos_perso_absolue -= 10;
-                        }
+                        //}
+                      }
+
+                      //gestion du saut
+                      if (evenements.key.keysym.sym == SDLK_SPACE && !pause){
+
                       }
 
                       if (evenements.key.keysym.sym == SDLK_p){

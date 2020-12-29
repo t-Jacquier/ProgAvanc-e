@@ -1,2 +1,2 @@
-high score : 5430
-00000
+high score : 10920
+0000

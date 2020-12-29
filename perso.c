@@ -27,15 +27,15 @@ int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu, en
         moveEnnemyRight(en, 4);
         //en[1] = movePlayerRight(en[1]);
         //en[2] = movePlayerRight(en[2]);
-        if (pos_milieu->x == -1200) //Si on arrive à gauche
-            pos_milieu->x = -600; //On replace l'image du milieu
+        if (pos_milieu->x == -1800) //Si on arrive à gauche
+            pos_milieu->x = 0; //On replace l'image du milieu
     }
 
     if (horizontal_dep == 2){
         pos_milieu->x += 10;
         moveEnnemyLeft(en, 4);
-        if (pos_milieu->x == 0){ //Si on arrive à droite
-            pos_milieu->x = -600; //On replace l'image du milieu
+        if (pos_milieu->x == -480){ //Si on arrive à droite
+            pos_milieu->x = -2280; //On replace l'image du milieu
         }
     }
     if (exec < JUMP_TIC){

@@ -15,7 +15,7 @@ SDL_Rect init_fond() {
     position_f_milieu.x = -600;
     position_f_milieu.y = 0;
     position_f_milieu.h = 600;
-    position_f_milieu.w = 1800;
+    position_f_milieu.w = 3000;
 
     return position_f_milieu;
 }
