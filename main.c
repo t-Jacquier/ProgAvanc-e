@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
         SDL_Texture* open_mouth = charger_image_transparente("open_mouth.bmp", ecran, 204, 0, 0);
 
         SDL_Texture* perso_reverse = charger_image_transparente("perso_reverse.bmp", ecran, 0, 255, 0);
-        SDL_Texture* open_mouth_reverse = charger_image_transparente("open_mouth_reverse.bmp", ecran, 0, 255, 0);
+        SDL_Texture* open_mouth_reverse = charger_image_transparente("open_mouth_reverse.bmp", ecran, 204, 0, 0);
 
         SDL_Texture* displayed_perso = perso;
         int sens; // Mémoire pour le tir
