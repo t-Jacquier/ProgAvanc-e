@@ -10,9 +10,9 @@
 #include "graphic.h"
 #include "param.h"
 
-int pause = 0;
+int pause = 0; /*!<Jeu en pause ou non*/
 
-int timer = 0;
+int timer = 0; /*!<temps d'attente pour la texture du personnage lors d'un tir*/
 
 int main(int argc, char *argv[]){
     SDL_Window* fenetre;  // Déclaration de la fenêtre

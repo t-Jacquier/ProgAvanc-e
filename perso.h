@@ -16,16 +16,15 @@
  * @brief représentation d'un projectile lancé par le joueur
  */
 struct s_projectile{
-    SDL_Rect coo; /*!<Coordonnées du projectile>*/
-    int shot; /*!<Projectile tiré ou non> */
-    int sens; /*!<Sens de déplacement TRUE : Droite ; FALSE : Gauche>*/
+    SDL_Rect coo; /*!<Coordonnées du projectile */
+    int shot; /*!<Projectile tiré ou non  */
+    int sens; /*!<Sens de déplacement TRUE : Droite ; FALSE : Gauche */
 };
 
 typedef struct s_projectile projectile_t;
 
 
 /**
- * @fn void shoot_projectile(SDL_Rect* perso, projectile_t* tab)
  * @brief set un projectil visible et actif quand il est tiré
  * @param perso coo du perso
  * @param tab tableau de projectiles

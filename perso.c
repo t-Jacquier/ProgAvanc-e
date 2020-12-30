@@ -11,6 +11,7 @@
 #include "perso.h"
 #include "ennemy.h"
 
+
 SDL_Rect init_perso(){
     SDL_Rect pos_perso;
     pos_perso.x = 280;

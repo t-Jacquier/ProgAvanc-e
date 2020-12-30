@@ -30,6 +30,9 @@
 
 #define FALSE 0
 
+/**
+ * @brief Nombre de projectile max affichable en même temps
+ */
 #define NB_PROJECTILE 10
 
 #endif //PROJET_HEADER_H

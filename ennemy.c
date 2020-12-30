@@ -49,7 +49,7 @@ void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, ennemy_t tab[10], int
     }
 }
 
-int detectCollid(int pos_perso, ennemy_t* en, SDL_Rect* struct_perso){
+int detectCollid(ennemy_t* en, SDL_Rect* struct_perso){
   /*if (pos_perso < en->pos_absolue + en->coo.w && pos_perso + struct_perso.w > en->pos_absolue){
     en->in_life = 0;
   } else{
@@ -64,7 +64,7 @@ int detectCollid(int pos_perso, ennemy_t* en, SDL_Rect* struct_perso){
   return 0;
 }
 
-int collid(int pos_perso, ennemy_t en[], SDL_Rect* struct_perso, int nbEnnemies){
+int collid(ennemy_t en[], SDL_Rect* struct_perso, int nbEnnemies){
   for (int i = 0; i<nbEnnemies;i++){
     if (detectCollid(pos_perso, &en[i], struct_perso) == 1)
       return 1;
