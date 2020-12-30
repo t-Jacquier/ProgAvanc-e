@@ -55,10 +55,16 @@ void shoot_projectile(SDL_Rect* perso, projectile_t* tab, int sens){
 void move_projectile(SDL_Rect* perso, projectile_t* tab){
   for (int i = 0; i<NB_PROJECTILE; i++){
     if (tab[i].shot){
-      if (tab[i].sens)
+      if (tab[i].sens) {
         tab[i].coo.x += PROJECTILE_SPEED;
-      else
+        if (tab[i].coo.x > perso->x + MAXIMUM_DISTANCE_PROJECTILE)
+          tab[i].shot = FALSE;
+      }
+      else {
         tab[i].coo.x -= PROJECTILE_SPEED;
+        if (tab[i].coo.x < perso->x - MAXIMUM_DISTANCE_PROJECTILE)
+          tab[i].shot = FALSE;
+      }
     }
   }
 }

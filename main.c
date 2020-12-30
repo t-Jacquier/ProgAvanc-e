@@ -134,7 +134,7 @@ int main(int argc, char *argv[]){
                 }
 
             //Gestion de la texture du perso
-            if (timer >= 0 && timer < 40){
+            if (timer >= 0 && timer < 20){
               if (sens == 1)
               displayed_perso = open_mouth;
               else
@@ -142,7 +142,7 @@ int main(int argc, char *argv[]){
               timer++;
             }
 
-            if (timer == 40){
+            if (timer == 20){
               timer = -1;
               sens = 0;
             }

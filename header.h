@@ -39,4 +39,10 @@
  * @brief Vitesse des projectiles
  */
 #define PROJECTILE_SPEED 15
+
+/**
+ * @brief Distance max parcourue par un projectile
+ */
+#define MAXIMUM_DISTANCE_PROJECTILE 400
+
 #endif //PROJET_HEADER_H
