@@ -66,7 +66,7 @@ int detectCollid(ennemy_t* en, SDL_Rect* struct_perso){
 
 int collid(ennemy_t en[], SDL_Rect* struct_perso, int nbEnnemies){
   for (int i = 0; i<nbEnnemies;i++){
-    if (detectCollid(pos_perso, &en[i], struct_perso) == 1)
+    if (detectCollid(&en[i], struct_perso) == 1)
       return 1;
   }
   return 0;

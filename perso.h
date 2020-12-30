@@ -23,6 +23,7 @@ struct s_projectile{
 
 typedef struct s_projectile projectile_t;
 
+projectile_t* init_projectile();
 
 /**
  * @brief set un projectil visible et actif quand il est tiré
@@ -38,6 +39,14 @@ void shoot_projectile(SDL_Rect* perso, projectile_t* tab, int sens);
  * @param tab tableau de projectiles
  */
 void move_projectile(SDL_Rect* perso, projectile_t* tab);
+
+/**
+ * @brief affiche les projectiles
+ * @param renderer renderer où la texture va être affichée
+ * @param texture Texture de projectile
+ * @param tab Tableau de projectile à afficher
+ */
+void copyProjectile(SDL_Renderer* renderer, SDL_Texture* texture, projectile_t* tab);
 
 /**
  * @brief initialise les coordonnées du personnage en début de jeu

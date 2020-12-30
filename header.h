@@ -35,4 +35,8 @@
  */
 #define NB_PROJECTILE 10
 
+/**
+ * @brief Vitesse des projectiles
+ */
+#define PROJECTILE_SPEED 15
 #endif //PROJET_HEADER_H

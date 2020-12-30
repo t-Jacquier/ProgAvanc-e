@@ -42,6 +42,8 @@ int main(int argc, char *argv[]){
         SDL_Rect pos_menu;
         pos_menu = init_menu(ecran, menu_back);
 
+        SDL_Texture* projectile_texture = charger_image_transparente("projectile.bmp", ecran, 0, 255, 0);
+
         SDL_Texture* perso = charger_image_transparente("perso2.bmp", ecran, 0, 255, 0);
         SDL_Texture* open_mouth = charger_image_transparente("open_mouth.bmp", ecran, 0, 255, 0);
 
@@ -63,6 +65,8 @@ int main(int argc, char *argv[]){
 
 
         ennemy_t *e = tabE(pos_perso_absolue);
+
+        projectile_t* proj = init_projectile();
 
         SDL_Texture* enmi = charger_image_transparente("pasteque.bmp", ecran, 255, 0, 0);
         
@@ -113,9 +117,10 @@ int main(int argc, char *argv[]){
                           displayed_perso = open_mouth;
                         }
                         if (displayed_perso == perso_reverse) {
-                          sens = 2;
+                          sens = 0;
                           displayed_perso = open_mouth_reverse;
                         }
+                        shoot_projectile(&pos_perso, proj, sens);
                         timer = 0;
                       }
 
@@ -141,10 +146,13 @@ int main(int argc, char *argv[]){
               timer = -1;
               sens = 0;
             }
+
+            move_projectile(&pos_perso, proj);
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
             menu(ecran, evenements, pause, menu_back, pos_menu);
             SDL_RenderCopy(ecran, displayed_perso, NULL, &pos_perso);
+            copyProjectile(ecran, projectile_texture, proj);
             copyEnnemies(ecran, enmi, e, 3);
             SDL_RenderPresent(ecran);
             //if (collid(pos_perso_absolue, e, &pos_perso, 3))
