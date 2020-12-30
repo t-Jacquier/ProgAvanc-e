@@ -147,8 +147,8 @@ int main(int argc, char *argv[]){
             SDL_RenderCopy(ecran, displayed_perso, NULL, &pos_perso);
             copyEnnemies(ecran, enmi, e, 3);
             SDL_RenderPresent(ecran);
-            if (collid(pos_perso_absolue, e, &pos_perso, 3))
-              reset(&position_f_milieu, &pos_perso, e, &pos_perso_absolue);
+            //if (collid(pos_perso_absolue, e, &pos_perso, 3))
+              //reset(&position_f_milieu, &pos_perso, e, &pos_perso_absolue);
 
             time_now = SDL_GetTicks();
             if (time_now - time_before > tms) //Si la frame est resté suffisamment longtemps, all good

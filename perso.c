@@ -20,6 +20,13 @@ SDL_Rect init_perso(){
 
     return pos_perso;
 }
-
+void shoot_projectile(SDL_Rect* perso, projectile_t* tab, int sens){
+  int i = 0;
+  while (i < NB_PROJECTILE){
+    if (!tab[i].shot)
+      tab[i].shot = 1;
+    i++;
+  }
+}
 
 

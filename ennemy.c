@@ -56,10 +56,12 @@ int detectCollid(int pos_perso, ennemy_t* en, SDL_Rect* struct_perso){
     en->in_life = 1;
   }
   */
-  if (SDL_HasIntersection(&en->coo, struct_perso) == SDL_TRUE){
-    return 1;
+  if (en->in_life == 1) { //On vérifie que l'ennemi est bien en vie
+    if (SDL_HasIntersection(&en->coo, struct_perso) == SDL_TRUE) {
+      return 1;
+    } else return 0;
   }
-  else return 0;
+  return 0;
 }
 
 int collid(int pos_perso, ennemy_t en[], SDL_Rect* struct_perso, int nbEnnemies){

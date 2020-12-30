@@ -12,17 +12,38 @@
 #ifndef PROJET_PERSO_H
 #define PROJET_PERSO_H
 
-
+/**
+ * @brief représentation d'un projectile lancé par le joueur
+ */
 struct s_projectile{
-    SDL_Rect coo;
-    int shot;
-    int sens;
+    SDL_Rect coo; /*!<Coordonnées du projectile>*/
+    int shot; /*!<Projectile tiré ou non> */
+    int sens; /*!<Sens de déplacement TRUE : Droite ; FALSE : Gauche>*/
 };
 
 typedef struct s_projectile projectile_t;
 
-void move_projectile(SDL_Rect* perso, projectile_t* tab); //Gere le mouvement des projectiles, qui reste collé au perso si pas tiré et qui avance sinon
 
+/**
+ * @fn void shoot_projectile(SDL_Rect* perso, projectile_t* tab)
+ * @brief set un projectil visible et actif quand il est tiré
+ * @param perso coo du perso
+ * @param tab tableau de projectiles
+ * @param sens sens du personnage TRUE : Droite ; FALSE : Gauche
+ */
+void shoot_projectile(SDL_Rect* perso, projectile_t* tab, int sens);
+
+/**
+ * @brief update la position des projectiles quand ils sont tirés
+ * @param perso coordonnées du personnage
+ * @param tab tableau de projectiles
+ */
+void move_projectile(SDL_Rect* perso, projectile_t* tab);
+
+/**
+ * @brief initialise les coordonnées du personnage en début de jeu
+ * @return SDL_Rect contenant les coordonnées du sprite personnage
+ */
 SDL_Rect init_perso();
 
 int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu, ennemy_t en[10]);
