@@ -45,7 +45,7 @@ int main(int argc, char *argv[]){
         SDL_Texture* projectile_texture = charger_image_transparente("projectile.bmp", ecran, 0, 255, 0);
 
         SDL_Texture* perso = charger_image_transparente("perso2.bmp", ecran, 0, 255, 0);
-        SDL_Texture* open_mouth = charger_image_transparente("open_mouth.bmp", ecran, 0, 255, 0);
+        SDL_Texture* open_mouth = charger_image_transparente("open_mouth.bmp", ecran, 204, 0, 0);
 
         SDL_Texture* perso_reverse = charger_image_transparente("perso_reverse.bmp", ecran, 0, 255, 0);
         SDL_Texture* open_mouth_reverse = charger_image_transparente("open_mouth_reverse.bmp", ecran, 0, 255, 0);
@@ -134,7 +134,7 @@ int main(int argc, char *argv[]){
                 }
 
             //Gestion de la texture du perso
-            if (timer >= 0 && timer < 20){
+            if (timer >= 0 && timer < 10){
               if (sens == 1)
               displayed_perso = open_mouth;
               else
@@ -142,7 +142,11 @@ int main(int argc, char *argv[]){
               timer++;
             }
 
-            if (timer == 20){
+            if (timer == 10){
+              if (sens == 1)
+                displayed_perso = perso;
+              else
+                displayed_perso = perso_reverse;
               timer = -1;
               sens = 0;
             }
