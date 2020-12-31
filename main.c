@@ -14,6 +14,8 @@ int pause = 0; /*!<Jeu en pause ou non*/
 
 int timer = 0; /*!<temps d'attente pour la texture du personnage lors d'un tir*/
 
+int saut = -1; /*!<timer pour le saut*/
+
 int main(int argc, char *argv[]){
     SDL_Window* fenetre;  // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
@@ -107,7 +109,8 @@ int main(int argc, char *argv[]){
 
                       //gestion du saut
                       if (evenements.key.keysym.sym == SDLK_SPACE && !pause){
-
+                        if (saut == -1)//Si il n'y a pas déjà un saut en cours
+                          saut = 0;
                       }
 
                       if (evenements.key.keysym.sym == SDLK_s && !pause){
@@ -151,7 +154,19 @@ int main(int argc, char *argv[]){
               sens = 0;
             }
 
+            if (saut >= 0 && saut <= 15){
+              saut++;
+              pos_perso.y -= 3;
+            }
+            if (saut > 15 && saut < 30){
+              saut++;
+              pos_perso.y += 3;
+            }
+            if (saut == 30)
+              saut = -1;
+
             move_projectile(&pos_perso, proj);
+            collidProjectile(e, proj, 3);
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
             menu(ecran, evenements, pause, menu_back, pos_menu);
@@ -159,8 +174,8 @@ int main(int argc, char *argv[]){
             copyProjectile(ecran, projectile_texture, proj);
             copyEnnemies(ecran, enmi, e, 3);
             SDL_RenderPresent(ecran);
-            //if (collid(pos_perso_absolue, e, &pos_perso, 3))
-              //reset(&position_f_milieu, &pos_perso, e, &pos_perso_absolue);
+            if (collid(e, &pos_perso, 3))
+              reset(&position_f_milieu, &pos_perso, e, &pos_perso_absolue);
 
             time_now = SDL_GetTicks();
             if (time_now - time_before > tms) //Si la frame est resté suffisamment longtemps, all good
