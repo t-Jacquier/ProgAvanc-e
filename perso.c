@@ -9,7 +9,6 @@
 #include <stdbool.h>
 #include "header.h"
 #include "perso.h"
-#include "ennemy.h"
 
 
 SDL_Rect init_perso(){

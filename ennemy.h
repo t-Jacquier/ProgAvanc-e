@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "header.h"
+#include "perso.h"
 
 
 #ifndef PROJET_ENNEMY_H
@@ -92,5 +93,12 @@ int detectCollid(ennemy_t* en, SDL_Rect* struct_perso);
  */
 int collid(ennemy_t en[], SDL_Rect* struct_perso, int nbEnnemies);
 
+/**
+ * @brief Détecte collision projectile / ennemies pour les faire disparaitre
+ * @param en tableau d'ennemies
+ * @param tab collection de projectiles
+ * @param nbEnnemies Nombre effectif d'ennemies
+ */
+void collidProjectile(ennemy_t* en, projectile_t* tab, int nbEnnemies);
 
 #endif //PROJET_ENNEMY_H

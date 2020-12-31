@@ -10,6 +10,7 @@
 #include "header.h"
 #include <time.h>
 #include "fonction_SDL.h"
+#include "perso.h"
 
 ennemy_t initE(int x_set, int y_set, int w_set, int h_set, bool inLife, int pos_absolue_joueur){
     ennemy_t ennemy;
@@ -29,7 +30,7 @@ ennemy_t* tabE(int pos_absolue_joueur){
   int x = 0;
   srand(time(NULL));
   for (int i = 0; i < 3; i++){
-    x = (rand() % 600) + 280;
+    x = (rand() % 600) + 480;
     e[i] = initE(x, 435, 48, 31, true, pos_absolue_joueur);
   }
   /*e[0] = initE(450, 450, 30, 30, true, 0);
@@ -84,3 +85,16 @@ void moveEnnemyLeft(ennemy_t* en, int nbEnnemies){
     en[i].coo.x += 10;
 }
 
+void collidProjectile(ennemy_t* en, projectile_t* tab, int nbEnnemies){
+  for (int i = 0; i < nbEnnemies; i++){
+    for (int j = 0; j < NB_PROJECTILE; j++){
+      if (tab[j].shot) {
+        if (SDL_HasIntersection(&en[i].coo, &tab[j].coo)) {
+          en[i].in_life = 0;
+          tab[j].shot = 0;
+          tab[j].coo.x = 0;
+        }
+      }
+    }
+  }
+}
