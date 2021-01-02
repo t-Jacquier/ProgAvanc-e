@@ -95,9 +95,6 @@ int main(int argc, char *argv[]){
                         displayed_perso = perso; // Sens du sprite
                       }
 
-                      if (evenements.key.keysym.sym == SDLK_n)
-                        printf("%d\n", pos_perso.y);
-
                       if (evenements.key.keysym.sym== SDLK_q && !pause){ //mouvement à gauche
                         if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
                           position_f_milieu.x += 10;
@@ -157,15 +154,15 @@ int main(int argc, char *argv[]){
               sens = 0;
             }
 
-            if (saut >= 0 && saut < 10){
+            if (saut >= 0 && saut <= 15){
               saut++;
-              pos_perso.y -= 5;
+              pos_perso.y -= 3;
             }
-            if (saut >= 10 && saut < 20){
+            if (saut > 15 && saut < 30){
               saut++;
-              pos_perso.y += 5;
+              pos_perso.y += 3;
             }
-            if (saut == 20)
+            if (saut == 30)
               saut = -1;
 
             move_projectile(&pos_perso, proj);
