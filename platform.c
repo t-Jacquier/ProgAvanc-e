@@ -32,7 +32,7 @@ void freePlatform(platform_t* p[]){
     free(p[0]);
 }
 
-void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, platform_t tab[], int nb_platform){
+void copyPlatform(SDL_Renderer* screen, SDL_Texture* text, platform_t tab[], int nb_platform){
     for (int i = 0; i < nb_platform; i++){
         if (tab[i].visible){
                 SDL_RenderCopy(screen, text, NULL, &tab[i].coo);
