@@ -87,12 +87,14 @@ void moveEnnemyLeft(ennemy_t* en, int nbEnnemies){
 
 void collidProjectile(ennemy_t* en, projectile_t* tab, int nbEnnemies){
   for (int i = 0; i < nbEnnemies; i++){
-    for (int j = 0; j < NB_PROJECTILE; j++){
-      if (tab[j].shot) {
-        if (SDL_HasIntersection(&en[i].coo, &tab[j].coo)) {
-          en[i].in_life = 0;
-          tab[j].shot = 0;
-          tab[j].coo.x = 0;
+    if (en[i].in_life) {
+      for (int j = 0; j < NB_PROJECTILE; j++) {
+        if (tab[j].shot) {
+          if (SDL_HasIntersection(&en[i].coo, &tab[j].coo)) {
+            en[i].in_life = 0;
+            tab[j].shot = 0;
+            tab[j].coo.x = 0;
+          }
         }
       }
     }
