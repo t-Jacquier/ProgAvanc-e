@@ -72,9 +72,7 @@ int main(int argc, char *argv[]){
 
         SDL_Texture* enmi = charger_image_transparente("pasteque.bmp", ecran, 255, 0, 0);
         
-        platform_t *p = tabP(5);
         
-        SDL_Texture* platform = charger_image_transparente("platform.bmp", ecran, 255, 0, 0);
         
         // Boucle principale
         while(!terminer)
@@ -93,18 +91,19 @@ int main(int argc, char *argv[]){
                       if (evenements.key.keysym.sym==SDLK_d && !pause){ //mouvement à droite
                         position_f_milieu.x -= 10;
                         moveEnnemyRight(e, 4);
-                        movePlatformRight(p, 5);
                         pos_perso_absolue +=10;
                         if (position_f_milieu.x == -1800)
                           position_f_milieu.x = 0;
                         displayed_perso = perso; // Sens du sprite
                       }
 
+                      if (evenements.key.keysym.sym == SDLK_n)
+                        printf("%d\n", pos_perso.y);
+
                       if (evenements.key.keysym.sym== SDLK_q && !pause){ //mouvement à gauche
                         if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
                           position_f_milieu.x += 10;
                           moveEnnemyLeft(e, 4);
-                          movePlatformLeft(p, 5);
                           if (position_f_milieu.x == -480){ //Si on arrive à droite
                             position_f_milieu.x = -2280; //On replace l'image du milieu
                           }
@@ -160,15 +159,15 @@ int main(int argc, char *argv[]){
               sens = 0;
             }
 
-            if (saut >= 0 && saut <= 15){
+            if (saut >= 0 && saut < 10){
               saut++;
-              pos_perso.y -= 3;
+              pos_perso.y -= 5;
             }
-            if (saut > 15 && saut < 30){
+            if (saut >= 10 && saut < 20){
               saut++;
-              pos_perso.y += 3;
+              pos_perso.y += 5;
             }
-            if (saut == 30)
+            if (saut == 20)
               saut = -1;
 
             move_projectile(&pos_perso, proj);
@@ -179,7 +178,6 @@ int main(int argc, char *argv[]){
             SDL_RenderCopy(ecran, displayed_perso, NULL, &pos_perso);
             copyProjectile(ecran, projectile_texture, proj);
             copyEnnemies(ecran, enmi, e, 3);
-            copyPlatform(ecran, platform, p, 5);
             SDL_RenderPresent(ecran);
             if (collid(e, &pos_perso, 3))
               reset(&position_f_milieu, &pos_perso, e, &pos_perso_absolue);
@@ -198,7 +196,6 @@ int main(int argc, char *argv[]){
         SDL_DestroyTexture(perso);
         SDL_DestroyRenderer(ecran);
         freeEnnemy(&e);
-        freePlatform(&p);
         highScore("score.txt", pos_perso_absolue);
         // Quitter SDL
         SDL_DestroyWindow(fenetre);
