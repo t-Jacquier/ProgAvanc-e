@@ -72,6 +72,8 @@ int main(int argc, char *argv[]){
 
         SDL_Texture* enmi = charger_image_transparente("pasteque.bmp", ecran, 255, 0, 0);
         
+        
+        
         // Boucle principale
         while(!terminer)
         {
