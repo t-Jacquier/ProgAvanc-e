@@ -26,3 +26,5 @@ void copyPlatform(SDL_Renderer* screen, SDL_Texture* text, platform_t tab[], int
 void movePlatformRight(platform_t* p, int nb_platform);
 
 void movePlatformLeft(platform_t* en, int nb_platform);
+
+int detectCollid_platform(platform_t *p, SDL_Rect* struct_perso);
