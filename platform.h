@@ -21,7 +21,7 @@ platform_t* tabP(int nb_platform);
 
 void freePlatform(platform_t* p[]);
 
-void copyPlatform(SDL_Renderer* screen, SDL_Texture* text, platform_t tab[], int nb_platform);
+void copyEnnemies(SDL_Renderer* screen, SDL_Texture* text, platform_t tab[], int nb_platform);
 
 void movePlatformRight(platform_t* p, int nb_platform);
 
