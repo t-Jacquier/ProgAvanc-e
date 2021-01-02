@@ -29,7 +29,7 @@ ennemy_t* tabE(int pos_absolue_joueur){
   ennemy_t *e = malloc(10*sizeof(ennemy_t));
   int x = 0;
   srand(time(NULL));
-  for (int i = 0; i < 3; i++){
+  for (int i = 0; i < 10; i++){
     x = (rand() % 600) + 480;
     e[i] = initE(x, 435, 48, 31, true, pos_absolue_joueur);
   }
