@@ -95,7 +95,7 @@ int main(int argc, char *argv[]){
 
                       if (evenements.key.keysym.sym==SDLK_d && !pause){ //mouvement à droite
                         position_f_milieu.x -= 10;
-                        moveEnnemyRight(e, 4);
+                        moveEnnemyRight(e, 10);
                         movePlatformRight(p, 5);
                         pos_perso_absolue +=10;
                         if (position_f_milieu.x == -1800)
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]){
                       if (evenements.key.keysym.sym== SDLK_q && !pause){ //mouvement à gauche
                         if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
                           position_f_milieu.x += 10;
-                          moveEnnemyLeft(e, 4);
+                          moveEnnemyLeft(e, 10);
                           movePlatformLeft(p, 5);
                           if (position_f_milieu.x == -480){ //Si on arrive à droite
                             position_f_milieu.x = -2280; //On replace l'image du milieu
@@ -178,16 +178,16 @@ int main(int argc, char *argv[]){
               saut = -1;
 
             move_projectile(&pos_perso, proj);
-            collidProjectile(e, proj, 3);
+            collidProjectile(e, proj, 10);
             //Collage des textures
             SDL_RenderCopy(ecran, f_milieu, NULL, &position_f_milieu);
             menu(ecran, evenements, pause, menu_back, pos_menu);
             SDL_RenderCopy(ecran, displayed_perso, NULL, &pos_perso);
             copyProjectile(ecran, projectile_texture, proj);
-            copyEnnemies(ecran, enmi, e, 3);
+            copyEnnemies(ecran, enmi, e, 10);
             copyPlatform(ecran, platform, p, 5);
             SDL_RenderPresent(ecran);
-            if (collid(e, &pos_perso, 3))
+            if (collid(e, &pos_perso, 10))
               reset(&position_f_milieu, &pos_perso, e, &pos_perso_absolue);
 
             time_now = SDL_GetTicks();
