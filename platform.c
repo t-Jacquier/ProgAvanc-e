@@ -21,10 +21,12 @@ platform_t initP(int x, int y, int w, int h, bool est_visible){
 platform_t* tabP(int nb_platform){
     platform_t *p= malloc(nb_platform*sizeof(platform_t));
     int x = 0;
+    int y = 0;
     srand(time(NULL));
     for (int i = 0; i < nb_platform; i++){
         x = (rand() % 1000) + 500;
-        p[i] = initP(x, 435, 48, 31, true);
+        y = (rand() % 20) + 420;
+        p[i] = initP(x, y, 48, 31, true);
     }
     return p;
 }
@@ -50,3 +52,10 @@ void movePlatformLeft(platform_t* p, int nb_platform){
   for (int i = 0; i < nb_platform; i++)
     p[i].coo.x += 10;
 }
+
+int detectCollid_platform(platform_t *p, SDL_Rect* struct_perso){
+    if (SDL_HasIntersection(&p->coo, struct_perso) == SDL_TRUE) {
+        return 1;
+    } else 
+        return 0;
+  }
