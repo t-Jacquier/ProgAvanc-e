@@ -16,7 +16,6 @@ int timer = 0; /*!<temps d'attente pour la texture du personnage lors d'un tir*/
 
 int saut = -1; /*!<timer pour le saut*/
 
-int resetEn = 0; /*!<S'active pour déplacer les ennemies et plateformes*/
 
 int main(int argc, char *argv[]){
     SDL_Window* fenetre;  // Déclaration de la fenêtre
