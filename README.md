@@ -13,7 +13,7 @@ Contrôle :
  p : mettre en pause
  esc : quitter le jeu (possible également depuis le menu de pause)
  
-Le jeu est développé en C avec la bibliothèque graphique SDL, les dessins réalisés par une amie.
+Le jeu est développé en C avec la bibliothèque graphique SDL, les dessins réalisés par une amie, Ema Glamcevski, étudiante en fac de Lettres
 
 La compilation et exécution est possible simplement en récupérant le contenu de la branche "Master" ou grâce aux fichiers de l'archive.
 La compilation se fait grâce au Makefile fourni par l'exécution de la commande "make". Celle ci génère quelques Warning qui n'ont cependant aucune incidence quand au bon déroulement du jeu. Le jeu se lance par la commande "./main".
