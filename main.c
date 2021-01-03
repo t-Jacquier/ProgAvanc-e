@@ -16,6 +16,7 @@ int timer = 0; /*!<temps d'attente pour la texture du personnage lors d'un tir*/
 
 int saut = -1; /*!<timer pour le saut*/
 
+int resetEn = 0; /*!<S'active pour déplacer les ennemies et plateformes*/
 
 int main(int argc, char *argv[]){
     SDL_Window* fenetre;  // Déclaration de la fenêtre
@@ -44,7 +45,7 @@ int main(int argc, char *argv[]){
 
         SDL_Texture* menu_back = charger_image("menu.bmp", ecran);
         SDL_Rect pos_menu;
-        pos_menu = init_menu(ecran, menu_back);
+        pos_menu= init_menu();
 
         SDL_Texture* projectile_texture = charger_image_transparente("projectile.bmp", ecran, 0, 255, 0);
 
@@ -78,6 +79,8 @@ int main(int argc, char *argv[]){
         
         SDL_Texture* platform = charger_image_transparente("platform.bmp", ecran, 255, 0, 0);
 
+
+
         
         // Boucle principale
         while(!terminer)
@@ -103,8 +106,6 @@ int main(int argc, char *argv[]){
                         displayed_perso = perso; // Sens du sprite
                       }
 
-                      if (evenements.key.keysym.sym == SDLK_n)
-                        printf("%d\n", pos_perso.y);
 
                       if (evenements.key.keysym.sym== SDLK_q && !pause){ //mouvement à gauche
                         if (pos_perso_absolue > 0) { // Pour ne pas dépasser le bord
@@ -145,7 +146,15 @@ int main(int argc, char *argv[]){
                       }
                       break;
 
-
+                  case SDL_MOUSEBUTTONDOWN:
+                    if (evenements.button.button == SDL_BUTTON_LEFT){
+                      if (pause){
+                        if (evenements.button.x > 213 && evenements.button.x < 388 && evenements.button.y > 230 && evenements.button.y < 280){
+                          terminer = true;
+                        }
+                      }
+                    }
+                    break;
                 }
 
             //Gestion de la texture du perso
@@ -167,11 +176,11 @@ int main(int argc, char *argv[]){
             }
 
             if (saut >= 0 && saut < 10){
-              saut++;
+              saut += 1;
               pos_perso.y -= 5;
             }
             if (saut >= 10 && saut < 20){
-              saut++;
+              saut += +1;
               pos_perso.y += 5;
             }
             if (saut == 20)
@@ -196,6 +205,12 @@ int main(int argc, char *argv[]){
             else{ // Sinon on temporise avant de passer
                 SDL_Delay(tms - (time_now - time_before));
                 time_before += tms;
+            }
+            if (!pause) {
+              if (pos_perso_absolue % 1000 == 0) {
+                e = tabE(pos_perso_absolue);
+                p = tabP(5);
+              }
             }
 
         }

@@ -48,10 +48,10 @@ void resethighScore(const char* nomFichier) {
     }
 }
 
-SDL_Rect init_menu(SDL_Renderer* ecran, SDL_Texture* menu_back){
+SDL_Rect init_menu(){
   //menu_back = charger_image("menu.bmp", ecran);
   SDL_Rect pos;
-  pos.x = 320;
+  pos.x = 163;
   pos.y = 150;
   pos.w = 275;
   pos.h = 123;

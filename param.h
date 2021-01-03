@@ -29,7 +29,7 @@ void resethighScore(const char* nomFichier);
 
 void menu(SDL_Renderer* ecran, SDL_Event event, int pause, SDL_Texture* menu_back, SDL_Rect pos_menu);
 
-SDL_Rect init_menu(SDL_Renderer* ecran, SDL_Texture* menu_back);
+SDL_Rect init_menu();
 
 /**
  * @brief Remet tout le jeu à 0 pour recommencer

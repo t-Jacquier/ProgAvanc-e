@@ -53,7 +53,6 @@ void copyProjectile(SDL_Renderer* renderer, SDL_Texture* texture, projectile_t* 
  */
 SDL_Rect init_perso();
 
-//int move(int exec, SDL_Rect* perso, int horizontal_dep, SDL_Rect* pos_milieu, ennemy_t en[10]);
 
 
 

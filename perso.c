@@ -77,3 +77,4 @@ void copyProjectile(SDL_Renderer* renderer, SDL_Texture* texture, projectile_t* 
 }
 
 
+
