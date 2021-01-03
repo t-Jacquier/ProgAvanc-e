@@ -30,8 +30,6 @@ void highScore(const char* nomFichier, int score){
 
         }
 
-        printf("%d", prec);
-        printf("\n");
 
         fclose(file);
     }

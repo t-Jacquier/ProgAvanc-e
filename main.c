@@ -213,7 +213,6 @@ int main(int argc, char *argv[]){
             }
 
         }
-        printf("%d \n",pos_perso_absolue);
         SDL_DestroyTexture(f_milieu);
         SDL_DestroyTexture(perso);
         SDL_DestroyRenderer(ecran);
